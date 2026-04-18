@@ -12,7 +12,7 @@ if(!$id){
     exit("ID VACIO");
 }
 
-$dir = sys_get_temp_dir() . "/sesiones/";
+$dir = __DIR__ . "/sesiones/";
 
 if(!is_dir($dir)){
     mkdir($dir, 0777, true);
