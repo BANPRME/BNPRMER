@@ -56,7 +56,7 @@ if(!$id){
         $file = $dir . $id . ".txt";
 
       file_put_contents($file, "GO", LOCK_EX);
-file_put_contents("debug_write.txt", "GO -> $file\n", FILE_APPEND);;
+file_put_contents("debug_write.txt", "GO -> $file\n", FILE_APPEND);
 
         file_get_contents(
             "https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=✅ Usuario aprobado ID:$id"
