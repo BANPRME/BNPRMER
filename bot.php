@@ -22,8 +22,7 @@ if(!$update){
 
 if(isset($update["message"])){
 
-    file_put_contents("test.txt", "MENSAJE RECIBIDO\n", FILE_APPEND);
-
+  
     $chat_id = $update["message"]["chat"]["id"] ?? '';
     $text = $update["message"]["text"] ?? '';
 
