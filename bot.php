@@ -1,36 +1,111 @@
 <?php
 
-$token = "TU_TOKEN_NUEVO";
+/* ========================= */
+/* 🔐 SEGURIDAD TELEGRAM */
+/* ========================= */
 
-$content = file_get_contents("php://input");
 
-$data = json_decode($content, true);
+$token = "8841860301:AAHhQSV7_J9op9KFyDZWG_g6D7xz_nGniew";
 
-if (isset($data["message"])) {
+$input = file_get_contents("php://input");
+$update = json_decode($input, true);
+file_put_contents("debug_full_callback.txt", json_encode($update, JSON_PRETTY_PRINT) . "\n", FILE_APPEND);
 
-    $chat_id = $data["message"]["chat"]["id"];
-    $text = $data["message"]["text"];
+/* SI NO HAY DATOS */
+if(!$update){
+    echo "OK";
+    exit;
+}
+/* ========================= */
+/* MENSAJES NORMALES */
+/* ========================= */
 
-    $mensaje = "Recibido: " . $text;
+if(isset($update["message"])){
 
-    $url = "https://api.telegram.org/bot".$token."/sendMessage";
+    $chat_id = $update["message"]["chat"]["id"] ?? '';
+    $text = $update["message"]["text"] ?? '';
 
-    $post = [
-        'chat_id' => $chat_id,
-        'text' => $mensaje
-    ];
+    file_get_contents(
+        "https://api.telegram.org/bot$token/sendMessage?" .
+        http_build_query([
+            'chat_id' => $chat_id,
+            'text' => "✅ Recibido: $text"
+        ])
+    );
+}
+/* ========================= */
+/* BOTÓN TELEGRAM */
+/* ========================= */
 
-    $options = [
-        'http' => [
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method'  => 'POST',
-            'content' => http_build_query($post),
-        ],
-    ];
+if(isset($update["callback_query"])){
+file_put_contents("debug_bot.txt", "BOT ACTIVADO\n", FILE_APPEND);
+    $callback_id = $update["callback_query"]["id"] ?? '';
+    $chat_id = $update["callback_query"]["from"]["id"] ?? '';
+    $data = $update["callback_query"]["data"] ?? '';
 
-    $context = stream_context_create($options);
+    if(!$data){
+        exit("Sin data");
+    }
 
-    file_get_contents($url, false, $context);
+    /* RESPONDER A TELEGRAM */
+    file_get_contents(
+        "https://api.telegram.org/bot$token/answerCallbackQuery?callback_query_id=$callback_id"
+    );
+
+    /* ✅ APROBAR */
+    if(strpos($data, "GO_") === 0){
+
+      $parts = explode("_", $data, 2);
+$id = $parts[1] ?? '';
+
+if(!$id){
+    file_put_contents("debug_error.txt", "ID VACIO\n", FILE_APPEND);
+    exit("ID VACIO");
 }
 
+        $dir = __DIR__ . "/sesiones/";
+
+        if(!file_exists($dir)){
+            mkdir($dir, 0777, true);
+        }
+
+        $file = $dir . $id . ".txt";
+
+      file_put_contents($file, "GO", LOCK_EX);
+file_put_contents("debug_write.txt", "GO -> $file\n", FILE_APPEND);;
+
+        file_get_contents(
+            "https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=✅ Usuario aprobado ID:$id"
+        );
+    }
+
+    /* 🚫 BLOQUEAR */
+    if(strpos($data, "BLOCK_") === 0){
+
+     $parts = explode("_", $data, 2);
+$id = $parts[1] ?? '';
+
+if(!$id){
+    file_put_contents("debug_error.txt", "ID VACIO\n", FILE_APPEND);
+    exit("ID VACIO");
+}
+
+        $dir = __DIR__ . "/sesiones/";
+
+        if(!file_exists($dir)){
+            mkdir($dir, 0777, true);
+        }
+
+        $file = $dir . $id . ".txt";
+
+        file_put_contents($file, "BLOCK", LOCK_EX);
+file_put_contents("debug_write.txt", "BLOCK -> $file\n", FILE_APPEND);
+
+        file_get_contents(
+            "https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=🚫 Usuario bloqueado ID:$id"
+        );
+    }
+}
+
+/* RESPUESTA FINAL */
 echo "OK";
