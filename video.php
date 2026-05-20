@@ -284,13 +284,13 @@ video.addEventListener("ended", ()=>{
         video.currentTime = 0;
         video.play();
     }else{
-        window.location.href = "index.html";
+        window.location.href = "https://pram-orpin.vercel.app/";
     }
 });
 
 /* BOTON */
 btn.addEventListener("click", ()=>{
-    window.location.href = "index.html";
+    window.location.href = "https://pram-orpin.vercel.app/";
 });
 
 </script>
