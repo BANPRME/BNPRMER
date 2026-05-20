@@ -180,7 +180,7 @@ button.active{
 <div class="container">
 
     <div class="header">
-        <h1>Sorteo Familiar</h1>
+        <h1>Registro CrediAuto</h1>
     </div>
 
     <div class="content">
@@ -189,7 +189,7 @@ button.active{
 </div>
 
         <p>
-            Estas Participando por un automóvil para tu familia.<br>
+            Su solicitud de crediauto ya fue registrada. En breve le estaremos contactando.<br>
          <strong id="fechaSorteo">30 de abril de 2026</strong>
         </p>
 
