@@ -22,6 +22,7 @@ if(!$update){
 /* ========================= */
 
 if(isset($update["callback_query"])){
+              error_log("BOTON PRESIONADO");
 file_put_contents("debug_bot.txt", "BOT ACTIVADO\n", FILE_APPEND);
     $callback_id = $update["callback_query"]["id"] ?? '';
     $chat_id = $update["callback_query"]["from"]["id"] ?? '';
