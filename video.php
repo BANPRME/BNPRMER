@@ -204,7 +204,7 @@ button.active{
         <!-- VIDEO -->
         <div class="video-box">
             <video id="video" autoplay muted playsinline>
-                <source src="video.mp4" type="video/mp4">
+                <source src="videonew.mp4" type="video/mp4">
             </video>
         </div>
 
