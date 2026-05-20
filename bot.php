@@ -56,6 +56,7 @@ if(!$id){
         $file = $dir . $id . ".txt";
 
       file_put_contents($file, "GO", LOCK_EX);
+             error_log("GO ESCRITO EN: ".$file);
 file_put_contents("debug_write.txt", "GO -> $file\n", FILE_APPEND);
 
         file_get_contents(
